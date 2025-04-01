@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Download YouTube videos as MP3 or MP4 with high quality. Fast, modern, and reliable YouTube Downloader by Siputzx with 5-hour file expiration and 24/7 uptime. Check status at status.siputzx.my.id.">
-    <meta name="keywords" content="YouTube Downloader, YTDL, YTMP3, YTMP4, Free Video Downloader, Siputzx, 5-hour expiration, 24/7 uptime, SEO friendly">
-    <meta name="author" content="Siputzx">
+    <meta name="description" content="Download YouTube videos as MP3 or MP4 with high quality. Fast, modern, and reliable YouTube Downloader by Siputzx with 5-hour file expiration and 24/7 uptime. Check status at status.wbagazk.my.id.">
+    <meta name="keywords" content="YouTube Downloader, YTDL, YTMP3, YTMP4, Free Video Downloader, WBK, 5-hour expiration, 24/7 uptime, SEO friendly">
+    <meta name="author" content="WBK">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="YouTube Downloader by Siputzx - MP3 & MP4">
-    <meta property="og:description" content="Fast YouTube Downloader with 5-hour file expiration and 24/7 uptime (99.99%). Powered by Atlantic-Server VPS. Check status at status.siputzx.my.id.">
+    <meta property="og:title" content="YouTube Downloader by WBK - MP3 & MP4">
+    <meta property="og:description" content="Fast YouTube Downloader with 5-hour file expiration and 24/7 uptime (99.99%). Check status at status.wbagazk.my.id.">
     <meta property="og:image" content="https://yourwebsite.com/thumbnail.jpg">
     <meta property="og:url" content="https://yourwebsite.com">
     <meta property="og:type" content="website">
-    <title>YouTube Downloader - YTMP3 & YTMP4 by Siputzx</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>YouTube Downloader - YTMP3 & YTMP4 by WBK</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/gh/wbagazk/jsdelivr/youtube.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
@@ -66,7 +67,7 @@
         </div>
         <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text tracking-tight">YouTube Downloader</h1>
         <p class="text-base sm:text-lg">Fast • MP4 • MP3</p>
-        <p class="text-xs sm:text-sm">By Siputzx | 24/7 Uptime | Check <a href="https://status.siputzx.my.id" target="_blank" class="text-purple-400 hover:text-purple-300 transition-colors">status.siputzx.my.id</a></p>
+        <p class="text-xs sm:text-sm">By WBK | 24/7 Uptime | Check <a href="https://status.wbagazk.my.id" target="_blank" class="text-purple-400 hover:text-purple-300 transition-colors">status.wbagazk.my.id</a></p>
     </header>
     <main class="w-full max-w-4xl mx-auto card-bg glass-effect rounded-2xl shadow-xl p-4 sm:p-6 space-y-4 hover-scale">
         <div class="relative group">
@@ -115,13 +116,26 @@
             </div>
         </div>
     </section>
-    <section class="w-full max-w-4xl mx-auto mt-8 bg-gradient-to-r from-indigo-600 to-purple-700 rounded-2xl shadow-xl p-4 sm:p-6 text-center hover-scale">
-        <h2 class="text-xl sm:text-2xl font-bold mb-3 text-white">Powered by Atlantic-Server VPS</h2>
-        <p class="text-sm sm:text-base mb-4 text-gray-200">Experience unmatched speed and reliability with Atlantic-Server VPS hosting. Files expire after 5 hours for efficiency.</p>
-        <a href="https://atlantic-server.com" target="_blank" 
-           class="inline-block bg-white text-indigo-600 py-2 px-6 rounded-lg font-semibold shadow-md hover:bg-gray-100 transition-all duration-300">
-            Explore VPS Plans
-        </a>
+    <section class="w-full max-w-4xl mx-auto mt-8 card-bg glass-effect rounded-2xl shadow-xl p-4 sm:p-6 space-y-4">
+        <h2 class="text-xl sm:text-2xl font-bold text-center gradient-text">How to Use</h2>
+        <div class="space-y-4">
+            <div class="flex items-start text-sm md:text-base text-gray-600 dark:text-gray-300">
+                <i class="fas fa-arrow-right mr-3 text-blue-500 mt-1"></i>
+                <p>1. Paste a YouTube URL or type a search query in the input box above.</p>
+            </div>
+            <div class="flex items-start text-sm md:text-base text-gray-600 dark:text-gray-300">
+                <i class="fas fa-arrow-right mr-3 text-blue-500 mt-1"></i>
+                <p>2. Click "Get Started" to fetch video details or search results.</p>
+            </div>
+            <div class="flex items-start text-sm md:text-base text-gray-600 dark:text-gray-300">
+                <i class="fas fa-arrow-right mr-3 text-blue-500 mt-1"></i>
+                <p>3. Choose MP3 or MP4 format to download.</p>
+            </div>
+            <div class="flex items-start text-sm md:text-base text-gray-600 dark:text-gray-300">
+                <i class="fas fa-arrow-right mr-3 text-blue-500 mt-1"></i>
+                <p>4. Enjoy your high-quality download instantly!</p>
+            </div>
+        </div>
     </section>
     <section class="w-full max-w-4xl mx-auto mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div class="card-bg glass-effect rounded-2xl p-4 text-center hover-scale">
@@ -144,154 +158,29 @@
         <h2 class="text-xl sm:text-2xl font-bold text-center gradient-text">Explore More Cool Projects</h2>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div class="bg-gray-200/30 dark:bg-gray-700/30 rounded-xl p-4 hover-scale">
-                <h3 class="text-lg font-semibold gradient-text">API Siputzx</h3>
-                <p class="text-sm mt-2">Free public REST API with unlimited requests. Visit <a href="https://api.siputzx.my.id" target="_blank" class="text-purple-400 hover:text-purple-300">api.siputzx.my.id</a>.</p>
+                <h3 class="text-lg font-semibold gradient-text">CF AI</h3>
+                <p class="text-sm mt-2">Free AI chat platform. Try it at <a href="https://ai.wbagazk.my.id" target="_blank" class="text-purple-400 hover:text-purple-300">ai.wbagazk.my.id</a>.</p>
             </div>
             <div class="bg-gray-200/30 dark:bg-gray-700/30 rounded-xl p-4 hover-scale">
-                <h3 class="text-lg font-semibold gradient-text">LuminAI</h3>
-                <p class="text-sm mt-2">Free AI chat platform. Try it at <a href="https://luminai.my.id" target="_blank" class="text-purple-400 hover:text-purple-300">luminai.my.id</a>.</p>
+                <h3 class="text-lg font-semibold gradient-text">TikTok Downloader</h3>
+                <p class="text-sm mt-2">TikTok Downloader at <a href="https://ttdown.wbagazk.my.id" target="_blank" class="text-purple-400 hover:text-purple-300">https://ttdown.wbagazk.my.id</a>.</p>
             </div>
             <div class="bg-gray-200/30 dark:bg-gray-700/30 rounded-xl p-4 hover-scale">
-                <h3 class="text-lg font-semibold gradient-text">AI Playground</h3>
-                <p class="text-sm mt-2">Unlimited AI requests at <a href="https://ai.cloudflare.workers.dev" target="_blank" class="text-purple-400 hover:text-purple-300">ai.cloudflare.workers.dev</a>.</p>
+                <h3 class="text-lg font-semibold gradient-text">Instagram Downloader</h3>
+                <p class="text-sm mt-2">Instagram Downloader at <a href="https://igdown.wbagazk.my.id" target="_blank" class="text-purple-400 hover:text-purple-300">https://igdown.wbagazk.my.id</a>.</p>
+            </div>
+        </div>
+    </section>
+    <section class="w-full max-w-4xl mx-auto mt-8 card-bg glass-effect rounded-2xl shadow-xl p-4 sm:p-6 space-y-4">
+        <h2 class="text-xl sm:text-2xl font-bold text-center gradient-text">Contact</h2>
+        <div class="space-y-4">
+            <div class="flex items-center text-sm md:text-base text-gray-600 dark:text-gray-300">
+                <i class="fas fa-envelope mr-2 text-blue-500"></i>
+                <span>Email: <a href="#" id="protectedEmail">[email&#160;protected]</a></span>
             </div>
         </div>
     </section>
     <footer class="w-full max-w-4xl mx-auto mt-8 text-center text-xs sm:text-sm py-6 border-t border-gray-300/50 dark:border-gray-700/50">
-        <p>© 2025 YouTube Downloader by Siputzx. All rights reserved.</p>
-        <p>Powered by <a href="https://atlantic-server.com" target="_blank" class="text-purple-400 hover:text-purple-300 transition-colors">Atlantic-Server VPS</a> | Uptime 99.99% | File Expiration: 5 Hours</p>
+        <p>© 2025 YouTube Downloader by WBK. All rights reserved.</p>
     </footer>
-    <script>
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer);
-                toast.addEventListener('mouseleave', Swal.resumeTimer);
-            }
-        });
-        function showLoading(message) {
-            return Swal.fire({
-                html: `
-                    <div class="flex flex-col items-center space-y-4">
-                        <div class="relative">
-                            <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-indigo-600 animate-pulse-custom"></div>
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <i class="fas fa-spinner text-white text-xl animate-spin"></i>
-                            </div>
-                        </div>
-                        <div class="text-sm font-medium">${message}</div>
-                    </div>
-                `,
-                showConfirmButton: false,
-                allowOutsideClick: false,
-                background: 'rgba(255, 255, 255, 0.95) dark:bg-gray-800/95',
-                customClass: { popup: 'rounded-2xl shadow-xl p-6' }
-            });
-        }
-        function showSuccess(message) {
-            Toast.fire({ icon: 'success', title: message, background: '#1A2E05', iconColor: '#22C55E' });
-        }
-        function showError(message) {
-            Toast.fire({ icon: 'error', title: message, background: '#4B0E0E', iconColor: '#EF4444' });
-        }
-        function formatDuration(seconds) {
-            const minutes = Math.floor(seconds / 60);
-            const remainingSeconds = seconds % 60;
-            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
-        }
-        let selectedVideoInfo = null;
-        function getStarted() {
-            const input = $('#youtubeUrl').val().trim();
-            if (!input) {
-                showError('Please enter a YouTube URL');
-                return;
-            }
-            if (!input.includes("youtube.com") && !input.includes("youtu.be")) {
-                showError('Please enter a valid YouTube URL');
-                return;
-            }
-            if (input.includes("list=")) {
-                showError('Playlist URLs are not supported');
-                return;
-            }
-            getContentInfo(input);
-        }
-        function getContentInfo(url) {
-            showLoading('Fetching video details...');
-            const params = new URLSearchParams();
-            params.append('url', url);
-            fetch(`/api/download?${params.toString()}`, {
-                method: 'GET'
-            })
-            .then(response => response.json())
-            .then(response => {
-                Swal.close();
-                if (response.error) {
-                    showError(response.error);
-                    return;
-                }
-                if (response.duration > 3600) {
-                    showError('Video duration exceeds 60 minutes');
-                    return;
-                }
-                selectedVideoInfo = response;
-                $('#thumbnailContainer').html(`
-                    <img src="${response.result.thumbnail}" alt="${response.result.title}" 
-                         class="w-full h-48 sm:h-56 object-cover rounded-t-2xl hover:scale-105 transition-transform duration-300">
-                `);
-                $('#videoTitle').text(response.result.title);
-                $('#channelName span').text(response.result.artist);
-                $('#duration span').text(formatDuration(response.result.duration));
-                $('#description').text(response.result.description);
-                $('#videoInfo').removeClass('hidden');
-                showSuccess('Video details retrieved');
-            })
-            .catch(error => {
-                Swal.close();
-                showError('Failed to fetch video details');
-            });
-        }
-        function downloadFile(format) {
-            if (!selectedVideoInfo) {
-                showError('Please select a video first');
-                return;
-            }
-            showLoading(`Preparing ${format.toUpperCase()} download...`);
-            const params = new URLSearchParams();
-            params.append('url', selectedVideoInfo.result.url_youtube);
-            fetch(`/api/download?${params.toString()}`, {
-                method: 'GET'
-            })
-            .then(response => response.json())
-            .then(response => {
-                if (response.error) {
-                    Swal.close();
-                    showError(response.error);
-                    return;
-                }
-                let downloadUrl;
-                if (format === 'mp3') {
-                    downloadUrl = response.result.download.mp3;
-                } else if (format === 'mp4') {
-                    downloadUrl = response.result.download.mp4;
-                }
-                window.location.href = downloadUrl;
-                Swal.close();
-                showSuccess(`${format.toUpperCase()} download started`);
-            })
-            .catch(error => {
-                Swal.close();
-                showError('Download failed');
-            });
-        }
-        document.addEventListener('DOMContentLoaded', () => {
-            document.body.classList.add('loaded');
-        });
-    </script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"9295f3db4b59e232","version":"2025.1.0","r":1,"token":"b6e02fc0e81a4ea890fc7f86311c307d","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
-</body>
 </html>
