@@ -85,8 +85,8 @@ router.get('/', async (req, res) => {
             thumbnail: mp4Result.thumbnail,
             url_youtube: url,
             download: {
-                mp3: mp3Result.download_url,
-                mp4: mp4Result.download_url
+                mp3: mp3Result.download_url.replace('https://ytdown.siputzx.my.id', 'https://ytdown.wbagazk.my.id'),
+                mp4: mp4Result.download_url.replace('https://ytdown.siputzx.my.id', 'https://ytdown.wbagazk.my.id')
             }
         };
 
