@@ -248,6 +248,7 @@
         }
 
         function downloadVideo(url) {
+            const videoUrl = document.getElementById('videoUrl').value.trim();
             const resultDiv = document.getElementById('result');
             if (!videoUrl) {
                 showError('Silakan masukkan URL YouTube.');
@@ -257,7 +258,7 @@
             $.ajax({
                 url: '/api/download',
                 type: 'GET',
-                data: { url: url },
+                data: { url: videoUrl },
                 success: function(data) {
                     let videoLink = data.result.download.mp4;
                     let musicLink = data.result.download.mp3;
