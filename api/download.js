@@ -82,6 +82,10 @@ router.get('/', async (req, res) => {
         const mp3Result = await download(url, 'mp3');
         const mp4Result = await download(url, 'mp4');
 
+        const baseDownloadUrl = 'https://ytdown.wbagazk.my.id/download/';
+        const downloadUrl = mp3Result.download_url.replace('https://ytdown.siputzx.my.id/download/', baseDownloadUrl);
+        const downloadUrl = mp4Result.download_url.replace('https://ytdown.siputzx.my.id/download/', baseDownloadUrl);
+
         const resultYT = {
             title: mp4Result.title,
             album: mp4Result.album,
