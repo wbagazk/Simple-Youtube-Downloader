@@ -26,9 +26,6 @@ const download = async (url, format) => {
       throw new Error('Gagal mendapatkan link unduhan.');
     }
 
-    const baseDownloadUrl = 'https://ytdown.wbagazk.my.id/download/';
-    const downloadUrl = data.download_url.replace('https://ytdown.siputzx.my.id/download/', baseDownloadUrl);
-
     return {
       id: info.id,
       title: info.title,
@@ -42,7 +39,7 @@ const download = async (url, format) => {
       view_count: info.view_count,
       tags: info.tags,
       thumbnail: info.thumbnail,
-      download_url: downloadUrl, 
+      download_url: info.download_url, 
     };
 
   } catch (error) {
