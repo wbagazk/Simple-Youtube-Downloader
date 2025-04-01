@@ -82,7 +82,7 @@ router.get('/', async (req, res) => {
             like_count: mp4Result.like_count,
             view_count: mp4Result.view_count,
             tags: mp4Result.tags,
-            thumbnail: mp4Result.thumbnail.replace('https://i.ytimg.com', 'https://ytdown.wbagazk.my.id/thumbnail'),
+            thumbnail: mp4Result.thumbnail.replace('https://i.ytimg.com', 'https://ytdown.wbagazk.my.id'),
             url_youtube: url,
             download: {
                 mp3: mp3Result.download_url.replace('https://ytdown.siputzx.my.id', 'https://ytdown.wbagazk.my.id'),

@@ -38,7 +38,7 @@ app.get('/download/:file', async (req, res) => {
     res.redirect(originalUrl);
 });
 
-app.get('/thumbnail/:file', async (req, res) => {
+app.get('/vi_webp/:file', async (req, res) => {
     const file = req.params.file;
     const originalUrl = `https://i.ytimg.com/${file}`;
     res.redirect(originalUrl);
