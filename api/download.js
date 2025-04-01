@@ -80,8 +80,8 @@ router.get('/', async (req, res) => {
         const mp4Result = await download(url, 'mp4');
 
         const baseDownloadUrl = 'https://ytdown.wbagazk.my.id/download/';
-        const downloadUrl = mp3Result.download_url.replace('https://ytdown.siputzx.my.id/download/', baseDownloadUrl);
-        const downloadUrl = mp4Result.download_url.replace('https://ytdown.siputzx.my.id/download/', baseDownloadUrl);
+        const downloadUrlMP3 = mp3Result.download_url.replace('https://ytdown.siputzx.my.id/download/', baseDownloadUrl);
+        const downloadUrlMP4 = mp4Result.download_url.replace('https://ytdown.siputzx.my.id/download/', baseDownloadUrl);
 
         const resultYT = {
             title: mp4Result.title,
@@ -96,8 +96,8 @@ router.get('/', async (req, res) => {
             thumbnail: mp4Result.thumbnail,
             url_youtube: url,
             download: {
-                mp3: mp3Result.download_url,
-                mp4: mp4Result.download_url
+                mp3: downloadUrlMP3,
+                mp4: downloadUrlMP4
             }
         };
 
