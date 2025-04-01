@@ -83,6 +83,7 @@ router.get('/', async (req, res) => {
             view_count: mp4Result.view_count,
             tags: mp4Result.tags,
             thumbnail: mp4Result.thumbnail,
+            url_youtube: url
             download: {
                 mp3: mp3Result.download_url,
                 mp4: mp4Result.download_url
