@@ -295,7 +295,7 @@
             });
         }
 
-         function downloadFile(url) {
+        function downloadFile(url) {
             fetch(url)
                 .then(response => {
                     if (!response.ok) {
@@ -304,14 +304,18 @@
                     return response.blob();
                 })
                 .then(blob => {
-                    const url = window.URL.createObjectURL(blob);
+                    const downloadUrl = window.URL.createObjectURL(blob);
                     const a = document.createElement('a');
                     a.style.display = 'none';
-                    a.href = url;
-                    a.download = '';
+                    a.href = downloadUrl;
+
+                    // Extract filename from the URL or use a default name
+                    const filename = url.split('/').pop().split('?')[0] || 'downloaded_file';
+                    a.download = filename;
+
                     document.body.appendChild(a);
                     a.click();
-                    window.URL.revokeObjectURL(url);
+                    window.URL.revokeObjectURL(downloadUrl);
                     showSuccess('Download started');
                 })
                 .catch(error => {
