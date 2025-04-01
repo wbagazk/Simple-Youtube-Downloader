@@ -3,182 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Download YouTube videos in high quality without watermark. Fast and free YouTube video downloader.">
-    <meta name="keywords" content="YouTube Downloader, YouTube Video Download, No Watermark, Free Downloader">
-    <meta name="author" content="WBK">
+    <meta name="description" content="Download YouTube videos as MP3 or MP4 with high quality. Fast, modern, and reliable YouTube Downloader by Siputzx with 5-hour file expiration and 24/7 uptime. Check status at status.siputzx.my.id.">
+    <meta name="keywords" content="YouTube Downloader, YTDL, YTMP3, YTMP4, Free Video Downloader, Siputzx, 5-hour expiration, 24/7 uptime, SEO friendly">
+    <meta name="author" content="Siputzx">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="YouTube Video Downloader - Fast & Free">
-    <meta property="og:description" content="Download YouTube videos instantly without watermark. 100% free and easy to use.">
+    <meta property="og:title" content="YouTube Downloader by Siputzx - MP3 & MP4">
+    <meta property="og:description" content="Fast YouTube Downloader with 5-hour file expiration and 24/7 uptime (99.99%). Powered by Atlantic-Server VPS. Check status at status.siputzx.my.id.">
     <meta property="og:image" content="https://yourwebsite.com/thumbnail.jpg">
     <meta property="og:url" content="https://yourwebsite.com">
     <meta property="og:type" content="website">
-    <title>YouTube Downloader - Fast & Free</title>
+    <title>YouTube Downloader - YTMP3 & YTMP4 by Siputzx</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-light: #f3f4f6;
+            --bg-dark: #111827;
+            --text-light: #1f2937;
+            --text-dark: #d1d5db;
+            --card-light: #ffffff;
+            --card-dark: #1f2937;
+            --gradient-light: linear-gradient(135deg, #e5e7eb, #d1d5db);
+            --gradient-dark: linear-gradient(135deg, #1f2937, #4b5563);
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: var(--gradient-dark);
+                color: var(--text-dark);
+            }
+            .glass-effect { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+            .card-bg { background: var(--card-dark); }
+        }
+        @media (prefers-color-scheme: light) {
+            body {
+                background: var(--gradient-light);
+                color: var(--text-light);
+            }
+            .glass-effect { background: rgba(0, 0, 0, 0.05); backdrop-filter: blur(12px); border: 1px solid rgba(0, 0, 0, 0.1); }
+            .card-bg { background: var(--card-light); }
+        }
+        @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.2); opacity: 1; } }
+        .animate-slide-in { animation: slideIn 0.3s ease-out forwards; }
+        .animate-pulse-custom { animation: pulse 1.5s infinite ease-in-out; }
+        .hover-scale { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .hover-scale:hover { transform: scale(1.03); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #9ca3af; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6b7280; }
+        .gradient-text { background: linear-gradient(90deg, #ec4899, #8b5cf6); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        body { opacity: 0; transition: opacity 0.5s ease-in; }
+        body.loaded { opacity: 1; }
+    </style>
 </head>
-<body class="bg-gradient-to-br from-gray-100 to-blue-50 dark:from-gray-900 dark:to-gray-800 min-h-screen flex flex-col items-center justify-start p-4 md:p-8 lg:p-12 font-sans">
-    
-    <!-- Navigation Section -->
-    <nav class="fixed top-4 right-4">
-        <div class="flex justify-between items-center">
-            <button id="menuToggle" class="text-gray-700 dark:text-gray-200 focus:outline-none">
-                <i class="fas fa-bars text-2xl"></i>
-            </button>
+<body class="min-h-screen flex flex-col items-center justify-start p-4 font-sans overflow-x-hidden">
+    <header class="w-full max-w-4xl mx-auto text-center space-y-4 mb-8">
+        <div class="inline-flex items-center justify-center p-3 rounded-full bg-red-600/20 glass-effect shadow-xl">
+            <i class="fab fa-youtube text-red-500 text-4xl animate-pulse"></i>
         </div>
-        <div id="navMenu" class="hidden mt-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg fixed right-0 z-10">
-            <a href="https://igdown.wbagazk.my.id/" class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Instagram Downloader</a>
-            <a href="https://ttdown.wbagazk.my.id/" class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">TikTok Downloader</a>
-            <a href="#" class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Facebook Downloader (Comingsoon)</a>
-            <a href="#" class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Twitter Downloader (Comingsoon)</a>
-        </div>
-    </nav>
-
-    <!-- Header Section -->
-    <header class="w-full max-w-3xl mx-auto text-center space-y-4 mb-10">
-        <div class="inline-flex items-center justify-center p-3 rounded-full bg-blue-50 dark:bg-blue-900/30 shadow-lg">
-            <i class="fab fa-YouTube text-white text-4xl"></i>
-        </div>
-        <h1 class="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-black to-white dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
-            YouTube Video & Audio Downloader
-        </h1>
-        <p class="text-lg text-gray-600 dark:text-gray-300">Fast • High Quality • Free</p>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold gradient-text tracking-tight">YouTube Downloader</h1>
+        <p class="text-base sm:text-lg">Fast • MP4 • MP3</p>
+        <p class="text-xs sm:text-sm">By Siputzx | 24/7 Uptime | Check <a href="https://status.siputzx.my.id" target="_blank" class="text-purple-400 hover:text-purple-300 transition-colors">status.siputzx.my.id</a></p>
     </header>
-    
-    <!-- Input Section -->
-    <main class="w-full max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 md:p-8 space-y-6">
-        <div class="relative group" id="downloadSection">
-            <input type="text" id="videoUrl" placeholder="Paste TikTok URL here..." 
-                   class="w-full pl-14 pr-6 py-4 bg-gray-50 dark:bg-gray-900/70 border-0 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-500/30 text-gray-700 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 shadow-sm transition-all duration-300">
-            <div class="absolute inset-y-0 left-5 flex items-center pointer-events-none">
-                <i class="fas fa-link text-gray-400"></i>
+    <main class="w-full max-w-4xl mx-auto card-bg glass-effect rounded-2xl shadow-xl p-4 sm:p-6 space-y-4 hover-scale">
+        <div class="relative group">
+            <input type="text" id="youtubeUrl" placeholder="Paste YouTube URL..." 
+                   class="w-full pl-12 pr-4 py-3 bg-gray-200/30 dark:bg-gray-700/30 border-0 rounded-xl focus:outline-none focus:ring-4 focus:ring-purple-500/50 placeholder-gray-500 shadow-md transition-all duration-300">
+            <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none group-focus-within:scale-110 transition-transform">
+                <i class="fas fa-link text-purple-400 group-focus-within:text-purple-300"></i>
             </div>
         </div>
-        <button id="downloadVideo" onclick="downloadVideo()" 
-                class="w-full bg-gradient-to-r from-black to-white hover:from-gray-800 hover:to-gray-300 text-white py-4 px-6 rounded-2xl flex items-center justify-center space-x-3 font-semibold shadow-md hover:shadow-lg">
-            <i class="fas fa-cloud-download-alt text-sm"></i>
+        <button onclick="getStarted()" 
+                class="w-full bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white py-3 px-4 rounded-xl flex items-center justify-center space-x-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300">
+            <i class="fas fa-play text-xs"></i>
             <span>Get Started</span>
         </button>
     </main>
-
-    <!-- Result Download Section -->
-    <main id="result" class="hidden w-full max-w-3xl mx-auto mt-10 bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 md:p-8 space-y-6">
-        <div class="flex flex-col items-center">
-            <video id="smallVideo" controls class="w-full h-auto rounded-lg mb-4">
-                <source id="videoSource" type="video/mp4">
-                Browser Anda tidak mendukung pemutaran video.
-            </video>
-            <div class="download-buttons grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <button id="downloadVideoButton" class="w-full bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 active:from-green-700 active:to-teal-800 text-white py-4 px-6 rounded-2xl transition-all duration-300 flex items-center justify-center space-x-3 font-semibold shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-green-500/50 focus:ring-offset-2 dark:ring-offset-gray-800">
-                    <i class="fas fa-download text-sm"></i>
-                    <span>Download Video</span>
-                </button>
-                <button id="downloadAudioButton" class="w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 active:from-purple-700 active:to-pink-800 text-white py-4 px-6 rounded-2xl transition-all duration-300 flex items-center justify-center space-x-3 font-semibold shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:ring-offset-2 dark:ring-offset-gray-800">
-                    <i class="fas fa-download text-sm"></i>
-                    <span>Download Audio</span>
-                </button>
+    <section id="videoInfo" class="hidden w-full max-w-4xl mx-auto mt-8 animate-slide-in">
+        <div class="card-bg glass-effect rounded-2xl shadow-xl overflow-hidden hover-scale">
+            <div id="thumbnailContainer" class="relative">
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent z-10"></div>
             </div>
-        </div>
-    </main>
-
-    <!-- Result Search Section -->
-    <section id="searchResults" class="hidden w-full max-w-3xl mx-auto mt-10 space-y-6">
-        <h2 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white">Search Results</h2>
-        <div id="resultList" class="space-y-4"></div>
-        <button id="loadMoreButton" onclick="loadMore()" 
-                class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white py-4 px-6 rounded-2xl transition-all duration-300 hidden shadow-md hover:shadow-lg">
-            Load More
-        </button>
-    </section>
-
-    <!-- How to Use Section -->
-    <section class="w-full max-w-3xl mx-auto mt-10 bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 md:p-8 space-y-6 transform transition-all duration-500 hover:shadow-xl">
-        <h2 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white">How to Use</h2>
-        <div class="space-y-4">
-            <div class="flex items-start text-sm md:text-base text-gray-600 dark:text-gray-300">
-                <i class="fas fa-arrow-right mr-3 text-blue-500 mt-1"></i>
-                <p>1. Paste a YouTube URL or type a search query in the input box above.</p>
-            </div>
-            <div class="flex items-start text-sm md:text-base text-gray-600 dark:text-gray-300">
-                <i class="fas fa-arrow-right mr-3 text-blue-500 mt-1"></i>
-                <p>2. Click "Get Started" to fetch video details or search results.</p>
-            </div>
-            <div class="flex items-start text-sm md:text-base text-gray-600 dark:text-gray-300">
-                <i class="fas fa-arrow-right mr-3 text-blue-500 mt-1"></i>
-                <p>3. Select a video (if searching), then choose MP3 or MP4 format to download.</p>
-            </div>
-            <div class="flex items-start text-sm md:text-base text-gray-600 dark:text-gray-300">
-                <i class="fas fa-arrow-right mr-3 text-blue-500 mt-1"></i>
-                <p>4. Enjoy your high-quality download instantly!</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="w-full max-w-3xl mx-auto mt-10 bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 md:p-8 space-y-6 transform transition-all duration-500 hover:shadow-xl">
-        <h2 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white">FAQ</h2>
-        <div class="space-y-4">
-            <div>
-                <div class="flex items-center text-sm md:text-base text-gray-600 dark:text-gray-300">
-                    <i class="fas fa-question-circle mr-2 text-blue-500"></i>
-                    <span>Is this free to use?</span>
+            <div class="p-4 sm:p-6 space-y-4">
+                <h2 id="videoTitle" class="text-xl sm:text-2xl font-bold line-clamp-2"></h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div id="channelName" class="flex items-center">
+                        <i class="fas fa-user-circle mr-2 text-purple-400"></i>
+                        <span></span>
+                    </div>
+                    <div id="duration" class="flex items-center">
+                        <i class="fas fa-clock mr-2 text-purple-400"></i>
+                        <span></span>
+                    </div>
+                    <div id="description" class="col-span-full text-sm line-clamp-3"></div>
                 </div>
-                <p class="text-sm md:text-base text-gray-600 dark:text-gray-400 ml-6">Yes, completely free with no hidden fees!</p>
-            </div>
-            <div>
-                <div class="flex items-center text-sm md:text-base text-gray-600 dark:text-gray-300">
-                    <i class="fas fa-question-circle mr-2 text-blue-500"></i>
-                    <span>What formats are available?</span>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <button onclick="downloadFile('mp3')" 
+                            class="bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 text-white py-3 px-4 rounded-xl flex items-center justify-center space-x-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300">
+                        <i class="fas fa-music text-xs"></i>
+                        <span>Download MP3</span>
+                    </button>
+                    <button onclick="downloadFile('mp4')" 
+                            class="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white py-3 px-4 rounded-xl flex items-center justify-center space-x-2 font-semibold shadow-md hover:shadow-lg transition-all duration-300">
+                        <i class="fas fa-video text-xs"></i>
+                        <span>Download MP4</span>
+                    </button>
                 </div>
-                <p class="text-sm md:text-base text-gray-600 dark:text-gray-400 ml-6">MP3 for audio and MP4 for video, both in high quality.</p>
-            </div>
-            <div>
-                <div class="flex items-center text-sm md:text-base text-gray-600 dark:text-gray-300">
-                    <i class="fas fa-question-circle mr-2 text-blue-500"></i>
-                    <span>Is there a download limit?</span>
-                </div>
-                <p class="text-sm md:text-base text-gray-600 dark:text-gray-400 ml-6">Videos over 60 minutes are not supported.</p>
             </div>
         </div>
     </section>
-
-    <!-- Contact Section -->
-    <section class="w-full max-w-3xl mx-auto mt-10 bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 md:p-8 space-y-6 transform transition-all duration-500 hover:shadow-xl">
-        <h2 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white">Contact</h2>
-        <div class="space-y-4">
-            <div class="flex items-center text-sm md:text-base text-gray-600 dark:text-gray-300">
-                <i class="fas fa-envelope mr-2 text-blue-500"></i>
-                <span>Email: <a href="#" id="protectedEmail">[email&#160;protected]</a></span>
+    <section class="w-full max-w-4xl mx-auto mt-8 bg-gradient-to-r from-indigo-600 to-purple-700 rounded-2xl shadow-xl p-4 sm:p-6 text-center hover-scale">
+        <h2 class="text-xl sm:text-2xl font-bold mb-3 text-white">Powered by Atlantic-Server VPS</h2>
+        <p class="text-sm sm:text-base mb-4 text-gray-200">Experience unmatched speed and reliability with Atlantic-Server VPS hosting. Files expire after 5 hours for efficiency.</p>
+        <a href="https://atlantic-server.com" target="_blank" 
+           class="inline-block bg-white text-indigo-600 py-2 px-6 rounded-lg font-semibold shadow-md hover:bg-gray-100 transition-all duration-300">
+            Explore VPS Plans
+        </a>
+    </section>
+    <section class="w-full max-w-4xl mx-auto mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="card-bg glass-effect rounded-2xl p-4 text-center hover-scale">
+            <i class="fas fa-bolt text-3xl text-purple-400 mb-3"></i>
+            <h3 class="text-lg font-semibold mb-2">Blazing Fast</h3>
+            <p class="text-sm">Instant downloads with optimized performance.</p>
+        </div>
+        <div class="card-bg glass-effect rounded-2xl p-4 text-center hover-scale">
+            <i class="fas fa-headphones text-3xl text-purple-400 mb-3"></i>
+            <h3 class="text-lg font-semibold mb-2">High Quality</h3>
+            <p class="text-sm">Crystal clear audio and video downloads.</p>
+        </div>
+        <div class="card-bg glass-effect rounded-2xl p-4 text-center hover-scale">
+            <i class="fas fa-star text-3xl text-purple-400 mb-3"></i>
+            <h3 class="text-lg font-semibold mb-2">Simple & Easy</h3>
+            <p class="text-sm">One-click downloads with no hassle.</p>
+        </div>
+    </section>
+    <section class="w-full max-w-4xl mx-auto mt-8 card-bg glass-effect rounded-2xl shadow-xl p-4 sm:p-6 space-y-4">
+        <h2 class="text-xl sm:text-2xl font-bold text-center gradient-text">Explore More Cool Projects</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="bg-gray-200/30 dark:bg-gray-700/30 rounded-xl p-4 hover-scale">
+                <h3 class="text-lg font-semibold gradient-text">API Siputzx</h3>
+                <p class="text-sm mt-2">Free public REST API with unlimited requests. Visit <a href="https://api.siputzx.my.id" target="_blank" class="text-purple-400 hover:text-purple-300">api.siputzx.my.id</a>.</p>
+            </div>
+            <div class="bg-gray-200/30 dark:bg-gray-700/30 rounded-xl p-4 hover-scale">
+                <h3 class="text-lg font-semibold gradient-text">LuminAI</h3>
+                <p class="text-sm mt-2">Free AI chat platform. Try it at <a href="https://luminai.my.id" target="_blank" class="text-purple-400 hover:text-purple-300">luminai.my.id</a>.</p>
+            </div>
+            <div class="bg-gray-200/30 dark:bg-gray-700/30 rounded-xl p-4 hover-scale">
+                <h3 class="text-lg font-semibold gradient-text">AI Playground</h3>
+                <p class="text-sm mt-2">Unlimited AI requests at <a href="https://ai.cloudflare.workers.dev" target="_blank" class="text-purple-400 hover:text-purple-300">ai.cloudflare.workers.dev</a>.</p>
             </div>
         </div>
     </section>
-
-    <footer class="w-full max-w-3xl mx-auto mt-10 text-center text-gray-500 dark:text-gray-400 text-sm py-6">
-        <p>&copy; 2025 YouTube Downloader by WBK. All rights reserved.</p>
+    <footer class="w-full max-w-4xl mx-auto mt-8 text-center text-xs sm:text-sm py-6 border-t border-gray-300/50 dark:border-gray-700/50">
+        <p>© 2025 YouTube Downloader by Siputzx. All rights reserved.</p>
+        <p>Powered by <a href="https://atlantic-server.com" target="_blank" class="text-purple-400 hover:text-purple-300 transition-colors">Atlantic-Server VPS</a> | Uptime 99.99% | File Expiration: 5 Hours</p>
     </footer>
-
     <script>
-        $(document).ready(function() {
-            $('#menuToggle').click(function(event) {
-                event.stopPropagation();
-                $('#navMenu').toggleClass('hidden');
-            });
-            $(document).click(function() {
-                if (!$('#navMenu').hasClass('hidden')) {
-                    $('#navMenu').addClass('hidden');
-                }
-            });
-        });
-
-        document.addEventListener("DOMContentLoaded", function() {
-            let email = "wbagazk@gmail.com";
-            let emailElement = document.getElementById("protectedEmail");
-            emailElement.href = "mailto:" + email;
-            emailElement.textContent = email;
-        });
-
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -186,206 +169,129 @@
             timer: 3000,
             timerProgressBar: true,
             didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                toast.addEventListener('mouseenter', Swal.stopTimer);
+                toast.addEventListener('mouseleave', Swal.resumeTimer);
             }
         });
-
         function showLoading(message) {
             return Swal.fire({
                 html: `
-                    <div class="space-y-4">
-                        <div class="w-16 h-16 mx-auto border-4 border-gray-200 border-t-blue-500 rounded-full animate-spin"></div>
-                        <div class="text-gray-600 text-sm">${message}</div>
+                    <div class="flex flex-col items-center space-y-4">
+                        <div class="relative">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-indigo-600 animate-pulse-custom"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i class="fas fa-spinner text-white text-xl animate-spin"></i>
+                            </div>
+                        </div>
+                        <div class="text-sm font-medium">${message}</div>
                     </div>
                 `,
                 showConfirmButton: false,
                 allowOutsideClick: false,
-                background: '#ffffff',
-                customClass: { popup: 'rounded-3xl shadow-lg' }
+                background: 'rgba(255, 255, 255, 0.95) dark:bg-gray-800/95',
+                customClass: { popup: 'rounded-2xl shadow-xl p-6' }
             });
         }
-
         function showSuccess(message) {
-            Toast.fire({
-                icon: 'success',
-                title: message,
-                background: '#F0FDF4',
-                iconColor: '#22C55E'
-            });
+            Toast.fire({ icon: 'success', title: message, background: '#1A2E05', iconColor: '#22C55E' });
         }
-
         function showError(message) {
-            Toast.fire({
-                icon: 'error',
-                title: message,
-                background: '#FEF2F2',
-                iconColor: '#EF4444'
-            });
+            Toast.fire({ icon: 'error', title: message, background: '#4B0E0E', iconColor: '#EF4444' });
         }
-
         function formatDuration(seconds) {
             const minutes = Math.floor(seconds / 60);
             const remainingSeconds = seconds % 60;
             return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
         }
-
-        let currentPageToken = null;
-        let selectedVideoUrl = '';
-
+        let selectedVideoInfo = null;
         function getStarted() {
-            const input = document.getElementById('youtubeUrl').value.trim();
+            const input = $('#youtubeUrl').val().trim();
             if (!input) {
-                showError('Please enter a YouTube URL or search query');
+                showError('Please enter a YouTube URL');
                 return;
             }
-            if (input.includes("youtube.com") || input.includes("youtu.be")) {
-                selectedVideoUrl = input;
-                downloadVideo(input);
-            } else {
-                searchVideo(input);
-            }
-        }
-
-        function downloadVideo(url) {
-            const videoUrl = document.getElementById('videoUrl').value.trim();
-            const resultDiv = document.getElementById('result');
-            if (!videoUrl) {
-                showError('Silakan masukkan URL YouTube.');
+            if (!input.includes("youtube.com") && !input.includes("youtu.be")) {
+                showError('Please enter a valid YouTube URL');
                 return;
             }
-            showLoading(`Preparing download...`);
-            $.ajax({
-                url: '/api/download',
-                type: 'GET',
-                data: { url: videoUrl },
-                success: function(data) {
-                    let videoLink = data.result.download.mp4;
-                    let musicLink = data.result.download.mp3;
-
-                    if (videoLink || musicLink) {
-                        resultDiv.innerHTML = `
-                            <div class="flex flex-col items-center">
-                                <video id="smallVideo" controls class="w-full h-auto rounded-lg mb-4">
-                                    <source src="${videoLink}" type="video/mp4">
-                                    Browser Anda tidak mendukung pemutaran video.
-                                </video>
-                                <div class="download-buttons grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <button onclick="window.open('${musicLink}', '_blank')" class="w-full bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 active:from-green-700 active:to-teal-800 text-white py-4 px-6 rounded-2xl transition-all duration-300 flex items-center justify-center space-x-3 font-semibold shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-green-500/50 focus:ring-offset-2 dark:ring-offset-gray-800">
-                                        <i class="fas fa-download text-sm"></i>
-                                        <span>Download Audio</span>
-                                    </button>
-                                    <button onclick="window.open('${videoLink}', '_blank')" class="w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 active:from-purple-700 active:to-pink-800 text-white py-4 px-6 rounded-2xl transition-all duration-300 flex items-center justify-center space-x-3 font-semibold shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:ring-offset-2 dark:ring-offset-gray-800">
-                                        <i class="fas fa-download text-sm"></i>
-                                        <span>Download Video</span>
-                                    </button>
-                                </div>
-                            </div>
-                        `;
-                        resultDiv.classList.remove('hidden');
-                        showSuccess('Success!');
-                    } else {
-                        showError('Download URL not found for the selected format');
-                    }
-                },
-                error: function(xhr) {
-                    Swal.close();
-                    showError(xhr.responseJSON?.error || 'Download failed');
+            if (input.includes("list=")) {
+                showError('Playlist URLs are not supported');
+                return;
+            }
+            getContentInfo(input);
+        }
+        function getContentInfo(url) {
+            showLoading('Fetching video details...');
+            const params = new URLSearchParams();
+            params.append('url', url);
+            fetch(`/api/download?${params.toString()}`, {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(response => {
+                Swal.close();
+                if (response.error) {
+                    showError(response.error);
+                    return;
                 }
-            });
-        }
-
-        function downloadFile(url) {
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.blob();
-                })
-                .then(blob => {
-                    const downloadUrl = window.URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.style.display = 'none';
-                    a.href = downloadUrl;
-
-                    // Extract filename from the URL or use a default name
-                    const filename = url.split('/').pop().split('?')[0] || 'downloaded_file';
-                    a.download = filename;
-
-                    document.body.appendChild(a);
-                    a.click();
-                    window.URL.revokeObjectURL(downloadUrl);
-                    showSuccess('Download started');
-                })
-                .catch(error => {
-                    showError('Download failed: ' + error.message);
-                });
-        }
-
-        function searchVideos(query) {
-            showLoading('Search masih dalam proses update, mohon ditunggu update selanjutnya...');
-            /*$('#videoInfo').addClass('hidden');
-            $('#searchResults').addClass('hidden');
-            $.ajax({
-                url: '/api/search',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({ query: query }),
-                success: function(response) {
-                    const results = response.results;
-                    if (results.length === 0) {
-                        showError('No results found');
-                        return;
-                    }
-                    displaySearchResults(results);
-                    $('#loadMoreButton').data('type', 'search').data('query', query).data('token', response.next_page_token);
-                    $('#loadMoreButton').toggleClass('hidden', !response.next_page_token);
-                    $('#searchResults').removeClass('hidden');
-                    Swal.close();
-                },
-                error: function(xhr) {
-                    Swal.close();
-                    showError(xhr.responseJSON?.error || 'Search failed');
+                if (response.duration > 3600) {
+                    showError('Video duration exceeds 60 minutes');
+                    return;
                 }
-            });*/
-        }
-
-        function displaySearchResults(videos) {
-            const resultList = $('#resultList');
-            resultList.empty();
-            videos.forEach(video => {
-                resultList.append(`
-                    <div class="flex items-start space-x-4 bg-gray-100 dark:bg-gray-700 rounded-2xl p-4 md:p-6 shadow-md hover:shadow-lg transition-all duration-300">
-                        <img src="${video.thumbnail}" alt="${video.title}" class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-lg">
-                        <div class="flex-1">
-                            <h3 class="text-lg md:text-xl font-semibold text-gray-800 dark:text-white line-clamp-2">${video.title}</h3>
-                            <p class="text-sm md:text-base text-gray-600 dark:text-gray-300">${video.artist}</p>
-                            <p class="text-sm md:text-base text-gray-600 dark:text-gray-300">${formatDuration(video.duration)}</p>
-                            <button onclick="selectVideo('${video.id}')" 
-                                    class="mt-3 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white py-2 px-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg">
-                                Select
-                            </button>
-                        </div>
-                    </div>
+                selectedVideoInfo = response;
+                $('#thumbnailContainer').html(`
+                    <img src="${response.result.thumbnail}" alt="${response.result.title}" 
+                         class="w-full h-48 sm:h-56 object-cover rounded-t-2xl hover:scale-105 transition-transform duration-300">
                 `);
+                $('#videoTitle').text(response.result.title);
+                $('#channelName span').text(response.result.artist);
+                $('#duration span').text(formatDuration(response.result.duration));
+                $('#description').text(response.result.description);
+                $('#videoInfo').removeClass('hidden');
+                showSuccess('Video details retrieved');
+            })
+            .catch(error => {
+                Swal.close();
+                showError('Failed to fetch video details');
             });
         }
-
-        function selectVideo(videoId) {
-            const url = `https://www.youtube.com/watch?v=${videoId}`;
-            selectedVideoUrl = url;
-            getVideoInfo(url);
-        }
-
-        function loadMore() {
-            const type = $('#loadMoreButton').data('type');
-            const token = $('#loadMoreButton').data('token');
-            if (type === 'search') {
-                const query = $('#loadMoreButton').data('query');
-                searchVideos(query, token);
+        function downloadFile(format) {
+            if (!selectedVideoInfo) {
+                showError('Please select a video first');
+                return;
             }
+            showLoading(`Preparing ${format.toUpperCase()} download...`);
+            const params = new URLSearchParams();
+            params.append('url', url);
+            fetch(`/api/download?${params.toString()}`, {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(response => {
+                if (response.error) {
+                    Swal.close();
+                    showError(response.error);
+                    return;
+                }
+                let downloadUrl;
+                if (format === 'mp3') {
+                    downloadUrl = response.result.download.mp3;
+                } else if (format === 'mp4') {
+                    downloadUrl = response.result.download.mp4;
+                }
+                window.location.href = downloadUrl;
+                Swal.close();
+                showSuccess(`${format.toUpperCase()} download started`);
+            })
+            .catch(error => {
+                Swal.close();
+                showError('Download failed');
+            });
         }
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.classList.add('loaded');
+        });
     </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"9295f3db4b59e232","version":"2025.1.0","r":1,"token":"b6e02fc0e81a4ea890fc7f86311c307d","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
 </body>
 </html>

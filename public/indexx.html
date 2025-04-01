@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Download YouTube videos in high quality without watermark. Fast and free YouTube video downloader.">
+    <meta name="keywords" content="YouTube Downloader, YouTube Video Download, No Watermark, Free Downloader">
+    <meta name="author" content="WBK">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="YouTube Video Downloader - Fast & Free">
+    <meta property="og:description" content="Download YouTube videos instantly without watermark. 100% free and easy to use.">
+    <meta property="og:image" content="https://yourwebsite.com/thumbnail.jpg">
+    <meta property="og:url" content="https://yourwebsite.com">
+    <meta property="og:type" content="website">
+    <title>YouTube Downloader - Fast & Free</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-gray-100 to-blue-50 dark:from-gray-900 dark:to-gray-800 min-h-screen flex flex-col items-center justify-start p-4 md:p-8 lg:p-12 font-sans">
+    
+    <!-- Navigation Section -->
+    <nav class="fixed top-4 right-4">
+        <div class="flex justify-between items-center">
+            <button id="menuToggle" class="text-gray-700 dark:text-gray-200 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <div id="navMenu" class="hidden mt-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg fixed right-0 z-10">
+            <a href="https://igdown.wbagazk.my.id/" class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Instagram Downloader</a>
+            <a href="https://ttdown.wbagazk.my.id/" class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">TikTok Downloader</a>
+            <a href="#" class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Facebook Downloader (Comingsoon)</a>
+            <a href="#" class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">Twitter Downloader (Comingsoon)</a>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="w-full max-w-3xl mx-auto text-center space-y-4 mb-10">
+        <div class="inline-flex items-center justify-center p-3 rounded-full bg-blue-50 dark:bg-blue-900/30 shadow-lg">
+            <i class="fab fa-YouTube text-white text-4xl"></i>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-black to-white dark:from-white dark:to-gray-400 bg-clip-text text-transparent">
+            YouTube Video & Audio Downloader
+        </h1>
+        <p class="text-lg text-gray-600 dark:text-gray-300">Fast • High Quality • Free</p>
+    </header>
+    
+    <!-- Input Section -->
+    <main class="w-full max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 md:p-8 space-y-6">
+        <div class="relative group" id="downloadSection">
+            <input type="text" id="videoUrl" placeholder="Paste TikTok URL here..." 
+                   class="w-full pl-14 pr-6 py-4 bg-gray-50 dark:bg-gray-900/70 border-0 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-500/30 text-gray-700 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 shadow-sm transition-all duration-300">
+            <div class="absolute inset-y-0 left-5 flex items-center pointer-events-none">
+                <i class="fas fa-link text-gray-400"></i>
+            </div>
+        </div>
+        <button id="downloadVideo" onclick="downloadVideo()" 
+                class="w-full bg-gradient-to-r from-black to-white hover:from-gray-800 hover:to-gray-300 text-white py-4 px-6 rounded-2xl flex items-center justify-center space-x-3 font-semibold shadow-md hover:shadow-lg">
+            <i class="fas fa-cloud-download-alt text-sm"></i>
+            <span>Get Started</span>
+        </button>
+    </main>
+
+    <!-- Result Download Section -->
+    <main id="result" class="hidden w-full max-w-3xl mx-auto mt-10 bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 md:p-8 space-y-6">
+        <div class="flex flex-col items-center">
+            <video id="smallVideo" controls class="w-full h-auto rounded-lg mb-4">
+                <source id="videoSource" type="video/mp4">
+                Browser Anda tidak mendukung pemutaran video.
+            </video>
+            <div class="download-buttons grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <button id="downloadVideoButton" class="w-full bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 active:from-green-700 active:to-teal-800 text-white py-4 px-6 rounded-2xl transition-all duration-300 flex items-center justify-center space-x-3 font-semibold shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-green-500/50 focus:ring-offset-2 dark:ring-offset-gray-800">
+                    <i class="fas fa-download text-sm"></i>
+                    <span>Download Video</span>
+                </button>
+                <button id="downloadAudioButton" class="w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 active:from-purple-700 active:to-pink-800 text-white py-4 px-6 rounded-2xl transition-all duration-300 flex items-center justify-center space-x-3 font-semibold shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:ring-offset-2 dark:ring-offset-gray-800">
+                    <i class="fas fa-download text-sm"></i>
+                    <span>Download Audio</span>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Result Search Section -->
+    <section id="searchResults" class="hidden w-full max-w-3xl mx-auto mt-10 space-y-6">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white">Search Results</h2>
+        <div id="resultList" class="space-y-4"></div>
+        <button id="loadMoreButton" onclick="loadMore()" 
+                class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white py-4 px-6 rounded-2xl transition-all duration-300 hidden shadow-md hover:shadow-lg">
+            Load More
+        </button>
+    </section>
+
+    <!-- How to Use Section -->
+    <section class="w-full max-w-3xl mx-auto mt-10 bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 md:p-8 space-y-6 transform transition-all duration-500 hover:shadow-xl">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white">How to Use</h2>
+        <div class="space-y-4">
+            <div class="flex items-start text-sm md:text-base text-gray-600 dark:text-gray-300">
+                <i class="fas fa-arrow-right mr-3 text-blue-500 mt-1"></i>
+                <p>1. Paste a YouTube URL or type a search query in the input box above.</p>
+            </div>
+            <div class="flex items-start text-sm md:text-base text-gray-600 dark:text-gray-300">
+                <i class="fas fa-arrow-right mr-3 text-blue-500 mt-1"></i>
+                <p>2. Click "Get Started" to fetch video details or search results.</p>
+            </div>
+            <div class="flex items-start text-sm md:text-base text-gray-600 dark:text-gray-300">
+                <i class="fas fa-arrow-right mr-3 text-blue-500 mt-1"></i>
+                <p>3. Select a video (if searching), then choose MP3 or MP4 format to download.</p>
+            </div>
+            <div class="flex items-start text-sm md:text-base text-gray-600 dark:text-gray-300">
+                <i class="fas fa-arrow-right mr-3 text-blue-500 mt-1"></i>
+                <p>4. Enjoy your high-quality download instantly!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="w-full max-w-3xl mx-auto mt-10 bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 md:p-8 space-y-6 transform transition-all duration-500 hover:shadow-xl">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white">FAQ</h2>
+        <div class="space-y-4">
+            <div>
+                <div class="flex items-center text-sm md:text-base text-gray-600 dark:text-gray-300">
+                    <i class="fas fa-question-circle mr-2 text-blue-500"></i>
+                    <span>Is this free to use?</span>
+                </div>
+                <p class="text-sm md:text-base text-gray-600 dark:text-gray-400 ml-6">Yes, completely free with no hidden fees!</p>
+            </div>
+            <div>
+                <div class="flex items-center text-sm md:text-base text-gray-600 dark:text-gray-300">
+                    <i class="fas fa-question-circle mr-2 text-blue-500"></i>
+                    <span>What formats are available?</span>
+                </div>
+                <p class="text-sm md:text-base text-gray-600 dark:text-gray-400 ml-6">MP3 for audio and MP4 for video, both in high quality.</p>
+            </div>
+            <div>
+                <div class="flex items-center text-sm md:text-base text-gray-600 dark:text-gray-300">
+                    <i class="fas fa-question-circle mr-2 text-blue-500"></i>
+                    <span>Is there a download limit?</span>
+                </div>
+                <p class="text-sm md:text-base text-gray-600 dark:text-gray-400 ml-6">Videos over 60 minutes are not supported.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="w-full max-w-3xl mx-auto mt-10 bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 md:p-8 space-y-6 transform transition-all duration-500 hover:shadow-xl">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white">Contact</h2>
+        <div class="space-y-4">
+            <div class="flex items-center text-sm md:text-base text-gray-600 dark:text-gray-300">
+                <i class="fas fa-envelope mr-2 text-blue-500"></i>
+                <span>Email: <a href="#" id="protectedEmail">[email&#160;protected]</a></span>
+            </div>
+        </div>
+    </section>
+
+    <footer class="w-full max-w-3xl mx-auto mt-10 text-center text-gray-500 dark:text-gray-400 text-sm py-6">
+        <p>&copy; 2025 YouTube Downloader by WBK. All rights reserved.</p>
+    </footer>
+
+    <script>
+        $(document).ready(function() {
+            $('#menuToggle').click(function(event) {
+                event.stopPropagation();
+                $('#navMenu').toggleClass('hidden');
+            });
+            $(document).click(function() {
+                if (!$('#navMenu').hasClass('hidden')) {
+                    $('#navMenu').addClass('hidden');
+                }
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            let email = "wbagazk@gmail.com";
+            let emailElement = document.getElementById("protectedEmail");
+            emailElement.href = "mailto:" + email;
+            emailElement.textContent = email;
+        });
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+
+        function showLoading(message) {
+            return Swal.fire({
+                html: `
+                    <div class="space-y-4">
+                        <div class="w-16 h-16 mx-auto border-4 border-gray-200 border-t-blue-500 rounded-full animate-spin"></div>
+                        <div class="text-gray-600 text-sm">${message}</div>
+                    </div>
+                `,
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                background: '#ffffff',
+                customClass: { popup: 'rounded-3xl shadow-lg' }
+            });
+        }
+
+        function showSuccess(message) {
+            Toast.fire({
+                icon: 'success',
+                title: message,
+                background: '#F0FDF4',
+                iconColor: '#22C55E'
+            });
+        }
+
+        function showError(message) {
+            Toast.fire({
+                icon: 'error',
+                title: message,
+                background: '#FEF2F2',
+                iconColor: '#EF4444'
+            });
+        }
+
+        function formatDuration(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+
+        let currentPageToken = null;
+        let selectedVideoUrl = '';
+
+        function getStarted() {
+            const input = document.getElementById('youtubeUrl').value.trim();
+            if (!input) {
+                showError('Please enter a YouTube URL or search query');
+                return;
+            }
+            if (input.includes("youtube.com") || input.includes("youtu.be")) {
+                selectedVideoUrl = input;
+                downloadVideo(input);
+            } else {
+                searchVideo(input);
+            }
+        }
+
+        function downloadVideo(url) {
+            const videoUrl = document.getElementById('videoUrl').value.trim();
+            const resultDiv = document.getElementById('result');
+            if (!videoUrl) {
+                showError('Silakan masukkan URL YouTube.');
+                return;
+            }
+            showLoading(`Preparing download...`);
+            $.ajax({
+                url: '/api/download',
+                type: 'GET',
+                data: { url: videoUrl },
+                success: function(data) {
+                    let videoLink = data.result.download.mp4;
+                    let musicLink = data.result.download.mp3;
+
+                    if (videoLink || musicLink) {
+                        resultDiv.innerHTML = `
+                            <div class="flex flex-col items-center">
+                                <video id="smallVideo" controls class="w-full h-auto rounded-lg mb-4">
+                                    <source src="${videoLink}" type="video/mp4">
+                                    Browser Anda tidak mendukung pemutaran video.
+                                </video>
+                                <div class="download-buttons grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <button onclick="window.open('${musicLink}', '_blank')" class="w-full bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 active:from-green-700 active:to-teal-800 text-white py-4 px-6 rounded-2xl transition-all duration-300 flex items-center justify-center space-x-3 font-semibold shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-green-500/50 focus:ring-offset-2 dark:ring-offset-gray-800">
+                                        <i class="fas fa-download text-sm"></i>
+                                        <span>Download Audio</span>
+                                    </button>
+                                    <button onclick="window.open('${videoLink}', '_blank')" class="w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 active:from-purple-700 active:to-pink-800 text-white py-4 px-6 rounded-2xl transition-all duration-300 flex items-center justify-center space-x-3 font-semibold shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:ring-offset-2 dark:ring-offset-gray-800">
+                                        <i class="fas fa-download text-sm"></i>
+                                        <span>Download Video</span>
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        resultDiv.classList.remove('hidden');
+                        showSuccess('Success!');
+                    } else {
+                        showError('Download URL not found for the selected format');
+                    }
+                },
+                error: function(xhr) {
+                    Swal.close();
+                    showError(xhr.responseJSON?.error || 'Download failed');
+                }
+            });
+        }
+
+        function downloadFile(url) {
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.blob();
+                })
+                .then(blob => {
+                    const downloadUrl = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = downloadUrl;
+
+                    // Extract filename from the URL or use a default name
+                    const filename = url.split('/').pop().split('?')[0] || 'downloaded_file';
+                    a.download = filename;
+
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(downloadUrl);
+                    showSuccess('Download started');
+                })
+                .catch(error => {
+                    showError('Download failed: ' + error.message);
+                });
+        }
+
+        function searchVideos(query) {
+            showLoading('Search masih dalam proses update, mohon ditunggu update selanjutnya...');
+            /*$('#videoInfo').addClass('hidden');
+            $('#searchResults').addClass('hidden');
+            $.ajax({
+                url: '/api/search',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ query: query }),
+                success: function(response) {
+                    const results = response.results;
+                    if (results.length === 0) {
+                        showError('No results found');
+                        return;
+                    }
+                    displaySearchResults(results);
+                    $('#loadMoreButton').data('type', 'search').data('query', query).data('token', response.next_page_token);
+                    $('#loadMoreButton').toggleClass('hidden', !response.next_page_token);
+                    $('#searchResults').removeClass('hidden');
+                    Swal.close();
+                },
+                error: function(xhr) {
+                    Swal.close();
+                    showError(xhr.responseJSON?.error || 'Search failed');
+                }
+            });*/
+        }
+
+        function displaySearchResults(videos) {
+            const resultList = $('#resultList');
+            resultList.empty();
+            videos.forEach(video => {
+                resultList.append(`
+                    <div class="flex items-start space-x-4 bg-gray-100 dark:bg-gray-700 rounded-2xl p-4 md:p-6 shadow-md hover:shadow-lg transition-all duration-300">
+                        <img src="${video.thumbnail}" alt="${video.title}" class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-lg">
+                        <div class="flex-1">
+                            <h3 class="text-lg md:text-xl font-semibold text-gray-800 dark:text-white line-clamp-2">${video.title}</h3>
+                            <p class="text-sm md:text-base text-gray-600 dark:text-gray-300">${video.artist}</p>
+                            <p class="text-sm md:text-base text-gray-600 dark:text-gray-300">${formatDuration(video.duration)}</p>
+                            <button onclick="selectVideo('${video.id}')" 
+                                    class="mt-3 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white py-2 px-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg">
+                                Select
+                            </button>
+                        </div>
+                    </div>
+                `);
+            });
+        }
+
+        function selectVideo(videoId) {
+            const url = `https://www.youtube.com/watch?v=${videoId}`;
+            selectedVideoUrl = url;
+            getVideoInfo(url);
+        }
+
+        function loadMore() {
+            const type = $('#loadMoreButton').data('type');
+            const token = $('#loadMoreButton').data('token');
+            if (type === 'search') {
+                const query = $('#loadMoreButton').data('query');
+                searchVideos(query, token);
+            }
+        }
+    </script>
+</body>
+</html>
