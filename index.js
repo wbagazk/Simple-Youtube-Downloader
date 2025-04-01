@@ -35,14 +35,12 @@ app.get("/", (req, res) => {
 app.get('/download/:file', async (req, res) => {
     const file = req.params.file;
     const originalUrl = `https://ytdown.siputzx.my.id/download/${file}`;
-
     res.redirect(originalUrl);
 });
 
 app.get('/thumbnail/:file', async (req, res) => {
     const file = req.params.file;
     const originalUrl = `https://i.ytimg.com/${file}`;
-
     res.redirect(originalUrl);
 });
 
