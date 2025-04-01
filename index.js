@@ -32,6 +32,13 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
+router.get('/video/:file', async (req, res) => {
+    const file = req.params.file;
+    const originalUrl = `https://ytdown.siputzx.my.id/download/${file}`;
+
+    res.redirect(originalUrl);
+});
+
 app.get("/monitor-page", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "monitor", "monitor.html"));
 });

@@ -47,13 +47,6 @@ const download = async (url, format) => {
   }
 };
 
-router.get('/download/:file', async (req, res) => {
-    const file = req.params.file;
-    const originalUrl = `https://ytdown.siputzx.my.id/download/${file}`;
-
-    res.redirect(originalUrl);
-});
-
 router.get('/', async (req, res) => {
     const url = req.query.url;
 
