@@ -100,8 +100,8 @@ router.get('/', async (req, res) => {
             thumbnail: mp4Result.thumbnail,
             url_youtube: url,
             download: {
-                mp3: mp3Result.download_url,
-                mp4: mp4Result.download_url
+                mp3: downloadUrlMP3,
+                mp4: downloadUrlMP4
             }
         };
 
