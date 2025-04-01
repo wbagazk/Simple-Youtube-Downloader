@@ -4,12 +4,12 @@ const FormData = require('form-data');
 
 const router = express.Router();
 
-const download = async (url, format ) => {
+const download = async (url, format) => {
   try {
     const formDataInfo = new FormData();
     formDataInfo.append('url', url);
 
-    const { data: info  } = await axios.post('https://ytdown.siputzx.my.id/api/get-info', formDataInfo, {
+    const { data: info } = await axios.post('https://ytdown.siputzx.my.id/api/get-info', formDataInfo, {
       headers: { ...formDataInfo.getHeaders() }
     });
 
@@ -26,6 +26,9 @@ const download = async (url, format ) => {
       throw new Error('Gagal mendapatkan link unduhan.');
     }
 
+    const baseDownloadUrl = 'https://ytdown.wbagazk.my.id/download/';
+    const downloadUrl = data.download_url.replace('https://ytdown.siputzx.my.id/download/', baseDownloadUrl);
+
     return {
       id: info.id,
       title: info.title,
@@ -39,13 +42,20 @@ const download = async (url, format ) => {
       view_count: info.view_count,
       tags: info.tags,
       thumbnail: info.thumbnail,
-      download_url: `https://ytdown.siputzx.my.id${data.download_url}`,
+      download_url: downloadUrl, 
     };
 
   } catch (error) {
     throw new Error(`Gagal mengambil data video: ${error.message}`);
   }
 };
+
+router.get('/download/:file', async (req, res) => {
+    const file = req.params.file;
+    const originalUrl = `https://ytdown.siputzx.my.id/download/${file}`;
+
+    res.redirect(originalUrl);
+});
 
 router.get('/', async (req, res) => {
     const url = req.query.url;
