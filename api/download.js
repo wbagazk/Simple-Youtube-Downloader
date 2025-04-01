@@ -4,7 +4,7 @@ const FormData = require('form-data');
 
 const router = express.Router();
 
-const download = async (url, format) => {
+const download = async (url, format ) => {
   try {
     const formDataInfo = new FormData();
     formDataInfo.append('url', url);
@@ -102,7 +102,7 @@ router.get('/', async (req, res) => {
             status: false,
             code: 500,
             creator: 'WBK',
-            message: `Gagal mengambil data: ${error.message}`
+            message: error.message
         }, null, 2));
     }
 });
