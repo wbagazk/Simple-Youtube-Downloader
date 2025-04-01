@@ -48,22 +48,6 @@
     </header>
     
     <!-- Input Section -->
-    <main class="w-full max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 md:p-8 space-y-6 transform transition-all duration-500 hover:shadow-xl">
-        <div class="relative group">
-            <input type="text" id="youtubeUrl" placeholder="Paste YouTube URL or Search..." 
-                   class="w-full pl-14 pr-6 py-4 bg-gray-50 dark:bg-gray-900/70 border-0 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-500/30 text-gray-700 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 shadow-sm transition-all duration-300">
-            <div class="absolute inset-y-0 left-5 flex items-center pointer-events-none transition-transform group-focus-within:scale-110">
-                <i class="fas fa-link text-gray-400 group-focus-within:text-blue-500 transition-colors"></i>
-            </div>
-        </div>
-        <button id="getStarted" onclick="getStarted()" 
-                class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 active:from-blue-700 active:to-indigo-800 text-white py-4 px-6 rounded-2xl transition-all duration-300 flex items-center justify-center space-x-3 font-semibold shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:ring-offset-2 dark:ring-offset-gray-800">
-            <i class="fas fa-play text-sm"></i>
-            <span>Get Started</span>
-        </button>
-    </main>
-
-   <!-- RESULT Download Section -->
     <main class="w-full max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 md:p-8 space-y-6">
         <div class="relative group" id="downloadSection">
             <input type="text" id="videoUrl" placeholder="Paste TikTok URL here..." 
@@ -77,6 +61,26 @@
             <i class="fas fa-cloud-download-alt text-sm"></i>
             <span>Get Started</span>
         </button>
+    </main>
+
+    <!-- Result Download Section -->
+    <main id="result" class="hidden w-full max-w-3xl mx-auto mt-10 bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 md:p-8 space-y-6">
+        <div class="flex flex-col items-center">
+            <video id="smallVideo" controls class="w-full h-auto rounded-lg mb-4">
+                <source id="videoSource" type="video/mp4">
+                Browser Anda tidak mendukung pemutaran video.
+            </video>
+            <div class="download-buttons grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <button id="downloadVideoButton" class="w-full bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 active:from-green-700 active:to-teal-800 text-white py-4 px-6 rounded-2xl transition-all duration-300 flex items-center justify-center space-x-3 font-semibold shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-green-500/50 focus:ring-offset-2 dark:ring-offset-gray-800">
+                    <i class="fas fa-download text-sm"></i>
+                    <span>Download Video</span>
+                </button>
+                <button id="downloadAudioButton" class="w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 active:from-purple-700 active:to-pink-800 text-white py-4 px-6 rounded-2xl transition-all duration-300 flex items-center justify-center space-x-3 font-semibold shadow-md hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-purple-500/50 focus:ring-offset-2 dark:ring-offset-gray-800">
+                    <i class="fas fa-download text-sm"></i>
+                    <span>Download Audio</span>
+                </button>
+            </div>
+        </div>
     </main>
 
     <!-- Result Search Section -->
@@ -243,8 +247,7 @@
             }
         }
 
-        function downloadVideo() {
-            const url = document.getElementById('videoUrl').value.trim();
+        function downloadVideo(url) {
             const resultDiv = document.getElementById('result');
             if (!videoUrl) {
                 showError('Silakan masukkan URL YouTube.');
