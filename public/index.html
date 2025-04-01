@@ -262,7 +262,7 @@
             }
             showLoading(`Preparing ${format.toUpperCase()} download...`);
             const params = new URLSearchParams();
-            params.append('url', url);
+            params.append('url', selectedVideoInfo.result.url_youtube);
             fetch(`/api/download?${params.toString()}`, {
                 method: 'GET'
             })
