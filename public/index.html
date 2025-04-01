@@ -234,7 +234,7 @@
         let selectedVideoUrl = '';
 
         function getStarted() {
-            const input = $('#youtubeUrl').val().trim();
+            const input = document.getElementById('youtubeUrl').value.trim();
             if (!input) {
                 showError('Please enter a YouTube URL or search query');
                 return;
