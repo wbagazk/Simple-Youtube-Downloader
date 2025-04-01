@@ -72,7 +72,7 @@ router.get('/', async (req, res) => {
         const mp3Result = await download(url, 'mp3');
         const mp4Result = await download(url, 'mp4');
 
-        const result = {
+        const resultYT = {
             title: mp4Result.title,
             album: mp4Result.album,
             artist: mp4Result.artist,
@@ -94,7 +94,7 @@ router.get('/', async (req, res) => {
             status: true,
             code: 200,
             creator: 'WBK',
-            result
+            result: resultYT
         }, null, 2));
     } catch (error) {
         res.setHeader('Content-Type', 'application/json');
