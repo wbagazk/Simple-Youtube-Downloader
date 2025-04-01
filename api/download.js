@@ -72,14 +72,6 @@ router.get('/', async (req, res) => {
         const mp3Result = await download(url, 'mp3');
         const mp4Result = await download(url, 'mp4');
 
-        if (!mp3Result.download_url || !mp4Result.download_url) {
-            throw new Error('Gagal mendapatkan link unduhan untuk salah satu format.');
-        }
-
-        const baseDownloadUrl = 'https://ytdown.wbagazk.my.id/download/';
-        const downloadUrlMP3 = mp3Result.download_url.replace('https://ytdown.siputzx.my.id/download/', baseDownloadUrl);
-        const downloadUrlMP4 = mp4Result.download_url.replace('https://ytdown.siputzx.my.id/download/', baseDownloadUrl);
-
         const resultYT = {
             title: mp4Result.title,
             album: mp4Result.album,
@@ -93,8 +85,8 @@ router.get('/', async (req, res) => {
             thumbnail: mp4Result.thumbnail,
             url_youtube: url,
             download: {
-                mp3: downloadUrlMP3,
-                mp4: downloadUrlMP4
+                mp3: mp3Result.download_url,
+                mp4: mp4Result.download_url
             }
         };
 
