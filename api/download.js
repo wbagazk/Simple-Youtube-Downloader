@@ -39,7 +39,7 @@ const download = async (url, format) => {
       view_count: info.view_count,
       tags: info.tags,
       thumbnail: info.thumbnail,
-      download_url: info.download_url
+      download_url: `https://ytdown.siputzx.my.id/${data.download_url}`
     };
 
   } catch (error) {
